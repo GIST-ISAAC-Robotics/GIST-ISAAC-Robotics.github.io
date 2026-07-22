@@ -18,7 +18,6 @@
      background atmosphere only, never a functional accent.
      ============================================================ */
   :root{
-    /* Brand & functional accent */
     --crimson:#BF2B25;
     --crimson-deep:#971E19;
     --crimson-dark:#6B1411;
@@ -27,36 +26,30 @@
     --accent-soft:#F3F1F1;
     --accent-border:#D8CFCF;
 
-    /* Ambient prismatic (decorative only) */
     --ambient-blue:#007CF0;
     --ambient-cyan:#00DFD8;
     --ambient-violet:#7928CA;
     --ambient-magenta:#FF0080;
     --ambient-amber:#F9CB28;
 
-    /* Surface */
     --canvas:#ffffff;
     --canvas-soft:#fafafa;
     --canvas-soft-2:#f5f5f5;
     --hairline:#ebebeb;
     --hairline-strong:#a1a1a1;
 
-    /* Text */
     --ink:#171717;
     --body:#4d4d4d;
     --mute:#888888;
     --on-accent:#ffffff;
     --on-ink:#ffffff;
 
-    /* Spacing (4px base) */
     --xxs:4px; --xs:8px; --sm:12px; --md:16px; --lg:24px;
     --xl:32px; --2xl:40px; --3xl:48px; --4xl:64px;
 
-    /* Radius */
     --r-xs:4px; --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px;
     --r-pill-sm:64px; --r-pill:100px; --r-full:9999px;
 
-    /* Elevation — stacked, never a single heavy drop */
     --e1: inset 0 0 0 1px #00000014;
     --e2: 0px 1px 1px #00000005, 0px 2px 2px #0000000a, inset 0 0 0 1px #00000014;
     --e3: 0px 2px 2px #0000000a, 0px 8px 8px -8px #0000000a, inset 0 0 0 1px #00000014;
@@ -86,16 +79,12 @@
   .eyebrow{
     font-size:13px;font-weight:500;line-height:16px;letter-spacing:.6px;
     text-transform:uppercase;color:var(--crimson);
-    display:inline-flex;align-items:center;gap:var(--sm);margin:0 0 var(--md);
+    display:inline-flex;align-items:center;gap:var(--sm);margin:0 0 var(--lg);
   }
   .eyebrow::before{content:"";width:24px;height:2px;background:var(--crimson);flex:none;}
   .eyebrow.on-dark{color:#ff6b63;}
   .eyebrow.on-dark::before{background:#ff6b63;}
 
-  h1.hero-title{
-    font-size:56px;font-weight:700;line-height:60px;letter-spacing:-2px;
-    margin:0 0 var(--md);
-  }
   h2.section-title{
     font-size:44px;font-weight:700;line-height:50px;letter-spacing:-1.6px;
     margin:0 0 var(--md);
@@ -107,7 +96,6 @@
   h3.card-title{
     font-size:20px;font-weight:600;line-height:28px;letter-spacing:-.4px;margin:0 0 var(--xs);
   }
-  .body-lg{font-size:18px;line-height:28px;color:var(--body);margin:0;}
   .body-sm{font-size:14px;line-height:20px;letter-spacing:-.2px;color:var(--body);margin:0;}
   .label-mono{
     font-size:12px;font-weight:500;line-height:16px;letter-spacing:.6px;
@@ -116,9 +104,7 @@
   .caption{font-size:12px;line-height:16px;color:var(--mute);margin:0;}
 
   /* ---------- Wordmark ---------- */
-  .wordmark{
-    font-weight:700;letter-spacing:-.6px;color:var(--ink);
-  }
+  .wordmark{font-weight:700;letter-spacing:-.6px;color:var(--ink);}
   .wordmark .dot{color:var(--crimson);}
   .wordmark.on-dark{color:var(--on-ink);}
 
@@ -155,7 +141,6 @@
 
   /* ---------- Hero ---------- */
   .hero{position:relative;overflow:hidden;background:var(--canvas-soft);}
-  /* Ambient prismatic mesh — atmosphere only, heavily blurred, low opacity */
   .hero::before{
     content:"";position:absolute;inset:-20% -10% auto -10%;height:120%;
     background:
@@ -180,15 +165,48 @@
     width:100%;max-width:420px;margin:0 auto;
     filter:drop-shadow(0 8px 24px rgba(0,0,0,.10));
   }
-  .hero-title .accent{color:var(--crimson);}
-  .hero-meta{margin-top:var(--lg);}
+
+  /* Big ISAAC wordmark */
+  .hero-mark{
+    font-size:104px;font-weight:700;line-height:1;letter-spacing:-4px;
+    margin:0 0 var(--lg);color:var(--ink);
+  }
+  .hero-mark .dot{color:var(--crimson);}
+
+  /* Acronym expansion — initials carry the crimson accent */
+  .hero-expand{
+    font-size:21px;font-weight:600;line-height:30px;letter-spacing:-.5px;
+    color:var(--body);margin:0 0 var(--sm);
+  }
+  .hero-expand .cap{
+    color:var(--crimson);font-weight:700;font-size:25px;letter-spacing:-.8px;
+  }
+
+  .hero-tagline{
+    font-size:17px;font-weight:500;line-height:26px;letter-spacing:-.3px;
+    color:var(--mute);margin:0;
+    padding-top:var(--sm);border-top:1px solid var(--hairline);
+    display:inline-block;
+  }
+  .hero-meta{margin-top:var(--xl);}
+
+  /* Contact shown as plain text under the buttons */
+  .hero-contact{
+    margin-top:var(--md);display:flex;flex-wrap:wrap;gap:var(--xs) var(--lg);
+  }
+  .hero-contact span{
+    font-size:14px;line-height:22px;letter-spacing:-.2px;color:var(--body);
+  }
+  .hero-contact .k{color:var(--mute);margin-right:6px;}
+  .hero-contact a{border-bottom:1px solid var(--accent-border);transition:.15s;}
+  .hero-contact a:hover{color:var(--crimson);border-bottom-color:var(--crimson);}
 
   /* ---------- Sections ---------- */
   section{padding:88px 0;}
   .section-head{max-width:760px;margin-bottom:var(--3xl);}
   .band-dark{background:var(--ink);color:var(--on-ink);}
   .band-dark .section-title{color:var(--on-ink);}
-  .band-dark .subtitle,.band-dark .body-lg,.band-dark .body-sm{color:#bdbdbd;}
+  .band-dark .subtitle,.band-dark .body-sm{color:#bdbdbd;}
   .band-soft{background:var(--canvas);}
 
   /* ---------- Cards ---------- */
@@ -263,10 +281,7 @@
   .contact-card a.value:hover{color:var(--crimson);}
 
   /* ---------- Footer ---------- */
-  footer{
-    background:var(--ink);color:var(--on-ink);
-    padding:var(--3xl) 0 var(--xl);
-  }
+  footer{background:var(--ink);color:var(--on-ink);padding:var(--3xl) 0 var(--xl);}
   .footer-inner{
     max-width:var(--content);margin:0 auto;padding:0 var(--lg);
     display:flex;flex-wrap:wrap;gap:var(--md);
@@ -278,8 +293,10 @@
   /* ---------- Responsive ---------- */
   @media (max-width:900px){
     .hero-inner{grid-template-columns:1fr;padding-top:var(--3xl);gap:var(--xl);}
-    .hero-logo{max-width:320px;}
-    h1.hero-title{font-size:40px;line-height:46px;letter-spacing:-1.4px;}
+    .hero-logo{max-width:300px;}
+    .hero-mark{font-size:76px;letter-spacing:-3px;}
+    .hero-expand{font-size:18px;line-height:27px;}
+    .hero-expand .cap{font-size:21px;}
     h2.section-title{font-size:32px;line-height:38px;letter-spacing:-1.1px;}
     .subtitle{font-size:18px;line-height:26px;}
     .g3,.g2,.contact-grid{grid-template-columns:1fr;}
@@ -289,8 +306,11 @@
   }
   @media (max-width:520px){
     .nav-links a:nth-child(1){display:none;}
-    h1.hero-title{font-size:32px;line-height:38px;}
+    .hero-mark{font-size:60px;letter-spacing:-2.4px;}
+    .hero-expand{font-size:16px;line-height:25px;}
+    .hero-expand .cap{font-size:19px;}
     h2.section-title{font-size:27px;line-height:33px;}
+    .btn{width:100%;}
   }
 </style>
 </head>
@@ -313,16 +333,27 @@
   <div class="hero-inner">
     <div>
       <p class="eyebrow">GIST Robotics Club</p>
-      <h1 class="hero-title">
-        <span class="accent">I</span>ntelligent <span class="accent">S</span>ystem<br />
-        <span class="accent">A</span>nd <span class="accent">A</span>utomatic <span class="accent">C</span>ontrol
-      </h1>
-      <p class="subtitle">GIST (전)유일 로봇 동아리</p>
+
+      <h1 class="hero-mark">ISAAC<span class="dot">.</span></h1>
+
+      <p class="hero-expand">
+        <span class="cap">I</span>ntelligent <span class="cap">S</span>ystem
+        <span class="cap">A</span>nd <span class="cap">A</span>utomatic <span class="cap">C</span>ontrol
+      </p>
+
+      <p class="hero-tagline">GIST (전)유일 로봇 동아리</p>
+
       <div class="btn-row hero-meta">
         <a class="btn btn-primary" href="https://instagram.com/isaac_robotics" target="_blank" rel="noopener">인스타그램</a>
         <a class="btn btn-secondary" href="mailto:gist.isaac.robotics@gmail.com">이메일 문의</a>
       </div>
+
+      <div class="hero-contact">
+        <span><span class="k">Instagram</span><a href="https://instagram.com/isaac_robotics" target="_blank" rel="noopener">@isaac_robotics</a></span>
+        <span><span class="k">Email</span><a href="mailto:gist.isaac.robotics@gmail.com">gist.isaac.robotics@gmail.com</a></span>
+      </div>
     </div>
+
     <div>
       <img class="hero-logo" src="assets/KakaoTalk_20260221_160939124_02.png" alt="ISAAC — GIST Robotics Club 로고" />
     </div>
