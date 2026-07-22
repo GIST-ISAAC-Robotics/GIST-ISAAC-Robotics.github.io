@@ -8,9 +8,12 @@
 <meta property="og:title" content="ISAAC — GIST Robotics Club" />
 <meta property="og:description" content="기계로봇공학과 소속 로봇 학술 동아리. 로봇 제작 팀 프로젝트와 스터디, 대회 참가를 함께합니다." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://gist-isaac-robotics.github.io/" />
+<meta property="og:image" content="https://gist-isaac-robotics.github.io/assets/proj-pingpong.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
-<link rel="icon" href="assets/KakaoTalk_20260221_160939124_02.png" />
+<link rel="icon" href="assets/favicon.png" />
 <link rel="stylesheet" as="style" crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
 
@@ -37,7 +40,7 @@
   :root{
     --crimson:#BF2B25;
     --crimson-deep:#971E19;
-    --accent-text:#BF2B25;          /* crimson used as text / rules */
+    --accent-text:#BF2B25;
     --accent-soft:#F3F1F1;
     --accent-border:#D8CFCF;
 
@@ -82,7 +85,7 @@
     --content:1152px;
   }
 
-  /* ---------------- Dark palette (shared block) ---------------- */
+  /* ---------------- Dark palette ---------------- */
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
       --accent-text:#F0655D;
@@ -309,10 +312,17 @@
 
   .card{background:var(--canvas);border-radius:var(--r-md);padding:var(--lg);box-shadow:var(--e3);}
   .card.top-rule{border-top:2px solid var(--crimson);}
+
   .card-dark{
-    background:var(--card-dark-bg);border-radius:var(--r-md);padding:var(--lg);
-    box-shadow:inset 0 0 0 1px #ffffff14;
+    background:var(--card-dark-bg);border-radius:var(--r-md);
+    box-shadow:inset 0 0 0 1px #ffffff14;overflow:hidden;
+    display:flex;flex-direction:column;
   }
+  .card-dark .thumb{
+    width:100%;aspect-ratio:4/3;object-fit:cover;
+    background:#0c0c0c;border-bottom:1px solid #ffffff14;
+  }
+  .card-dark .card-body{padding:var(--lg);}
   .card-dark .card-title{color:var(--on-band);}
   .card-dark .body-sm{color:var(--card-dark-body);}
 
@@ -338,7 +348,6 @@
     content:"";position:absolute;left:0;top:10px;
     width:5px;height:5px;border-radius:var(--r-full);background:var(--accent-text);
   }
-  .card-dark ul.ticks li{color:var(--card-dark-body);}
 
   .year-tag{
     display:inline-block;background:var(--year-tag-dark-bg);color:#ff6b63;
@@ -451,7 +460,8 @@
     </div>
 
     <div>
-      <img class="hero-logo" src="assets/KakaoTalk_20260221_160939124_02.png" alt="ISAAC — GIST Robotics Club 로고" />
+      <img class="hero-logo" src="assets/logo.png" width="900" height="681"
+           alt="ISAAC — GIST Robotics Club 로고" />
     </div>
   </div>
 </div>
@@ -520,33 +530,57 @@
     <span class="year-tag">2025</span>
     <div class="grid g3" style="margin-bottom:var(--3xl);">
       <div class="card-dark">
-        <h3 class="card-title">GIST AI창의융합경진대회</h3>
-        <p class="body-sm">탁구 로봇 부문에 탁구 로봇을 제작해 출전했습니다.</p>
-        <p class="award">2위 수상</p>
+        <img class="thumb" src="assets/proj-pingpong.jpg" width="1000" height="750" loading="lazy"
+             alt="탁구대 앞에 설치된 탁구 로봇의 라켓 구동부" />
+        <div class="card-body">
+          <h3 class="card-title">GIST AI창의융합경진대회</h3>
+          <p class="body-sm">탁구 로봇 부문에 탁구 로봇을 제작해 출전했습니다.</p>
+          <p class="award">2위 수상</p>
+        </div>
       </div>
       <div class="card-dark">
-        <h3 class="card-title">드로잉 머신 제작</h3>
-        <p class="body-sm">X-Y 플로터를 기반으로, 입력한 도안을 그려내는 기계를 만들었습니다.</p>
+        <img class="thumb" src="assets/proj-drawing.jpg" width="1000" height="750" loading="lazy"
+             alt="X-Y 플로터가 종이에 ISAAC 로고 도안을 그리고 있는 모습" />
+        <div class="card-body">
+          <h3 class="card-title">드로잉 머신 제작</h3>
+          <p class="body-sm">X-Y 플로터를 기반으로, 입력한 도안을 그려내는 기계를 만들었습니다.</p>
+        </div>
       </div>
       <div class="card-dark">
-        <h3 class="card-title">인형 뽑기 기계</h3>
-        <p class="body-sm">설계를 마치고 제작에 착수했습니다.</p>
+        <img class="thumb" src="assets/proj-claw.jpg" width="1000" height="750" loading="lazy"
+             alt="인형 뽑기 기계의 3D 설계 렌더링" />
+        <div class="card-body">
+          <h3 class="card-title">인형 뽑기 기계</h3>
+          <p class="body-sm">설계를 마치고 제작에 착수했습니다.</p>
+        </div>
       </div>
     </div>
 
     <span class="year-tag">2024</span>
     <div class="grid g3" style="margin-bottom:var(--xl);">
       <div class="card-dark">
-        <h3 class="card-title">기계공학부 연구발표회 참여</h3>
-        <p class="body-sm">한 해 동안의 제작 결과를 학부 연구발표회에서 발표했습니다.</p>
+        <img class="thumb" src="assets/proj-expo.jpg" width="1000" height="750" loading="lazy"
+             alt="기계공학부 연구발표회에 전시된 ISAAC 부스" />
+        <div class="card-body">
+          <h3 class="card-title">기계공학부 연구발표회 참여</h3>
+          <p class="body-sm">한 해 동안의 제작 결과를 학부 연구발표회에서 발표했습니다.</p>
+        </div>
       </div>
       <div class="card-dark">
-        <h3 class="card-title">이족보행 로봇 제작</h3>
-        <p class="body-sm">두 다리로 걷는 로봇에 도전했습니다. 완성에는 이르지 못했습니다.</p>
+        <img class="thumb" src="assets/proj-biped.jpg" width="1000" height="750" loading="lazy"
+             alt="서보 모터로 조립한 이족보행 로봇의 다리 구조" />
+        <div class="card-body">
+          <h3 class="card-title">이족보행 로봇 제작</h3>
+          <p class="body-sm">두 다리로 걷는 로봇에 도전했습니다. 완성에는 이르지 못했습니다.</p>
+        </div>
       </div>
       <div class="card-dark">
-        <h3 class="card-title">미로탐색 로봇 제작</h3>
-        <p class="body-sm">트레모(Trémaux) 알고리즘을 적용해 미로를 스스로 빠져나오는 로봇을 만들었습니다.</p>
+        <img class="thumb" src="assets/proj-maze.jpg" width="1000" height="750" loading="lazy"
+             alt="3D 프린팅 차체에 눈알 스티커를 붙인 미로탐색 로봇" />
+        <div class="card-body">
+          <h3 class="card-title">미로탐색 로봇 제작</h3>
+          <p class="body-sm">트레모(Trémaux) 알고리즘을 적용해 미로를 스스로 빠져나오는 로봇을 만들었습니다.</p>
+        </div>
       </div>
     </div>
 
