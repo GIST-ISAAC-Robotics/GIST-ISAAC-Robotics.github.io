@@ -6,23 +6,38 @@
 <title>ISAAC — GIST Robotics Club</title>
 <meta name="description" content="ISAAC (Intelligent System And Automatic Control) — GIST 기계로봇공학과 소속 로봇 학술 동아리." />
 <meta property="og:title" content="ISAAC — GIST Robotics Club" />
-<meta property="og:description" content="기계로봇공학과 소속 로봇 학술 동아리. 로봇 제작 팀 프로젝트와 대회 참가를 함께합니다." />
+<meta property="og:description" content="기계로봇공학과 소속 로봇 학술 동아리. 로봇 제작 팀 프로젝트와 스터디, 대회 참가를 함께합니다." />
 <meta property="og:type" content="website" />
+<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
 <link rel="icon" href="assets/KakaoTalk_20260221_160939124_02.png" />
 <link rel="stylesheet" as="style" crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+
+<script>
+  /* Apply the saved theme before first paint so there is no flash. */
+  (function () {
+    try {
+      var saved = localStorage.getItem("isaac-theme");
+      if (saved === "dark" || saved === "light") {
+        document.documentElement.setAttribute("data-theme", saved);
+      }
+    } catch (e) { /* storage blocked — fall back to system preference */ }
+  })();
+</script>
+
 <style>
   /* ============================================================
      Crimson Slide System — web adaptation
      Single functional accent: crimson. Ambient prismatic mesh is
      background atmosphere only, never a functional accent.
      ============================================================ */
+
+  /* ---------------- Light (default) ---------------- */
   :root{
     --crimson:#BF2B25;
     --crimson-deep:#971E19;
-    --crimson-dark:#6B1411;
-    --gradient-start:#4F100E;
-    --gradient-mid:#7B1815;
+    --accent-text:#BF2B25;          /* crimson used as text / rules */
     --accent-soft:#F3F1F1;
     --accent-border:#D8CFCF;
 
@@ -31,32 +46,108 @@
     --ambient-violet:#7928CA;
     --ambient-magenta:#FF0080;
     --ambient-amber:#F9CB28;
+    --ambient-opacity:.24;
 
     --canvas:#ffffff;
     --canvas-soft:#fafafa;
+    --canvas-soft-0:rgba(250,250,250,0);
     --canvas-soft-2:#f5f5f5;
     --hairline:#ebebeb;
-    --hairline-strong:#a1a1a1;
+
+    --band-dark-bg:#171717;
+    --card-dark-bg:#1f1f1f;
+    --card-dark-body:#b4b4b4;
+    --on-band:#ffffff;
+    --band-callout-bg:#242424;
+    --year-tag-dark-bg:#2a2020;
 
     --ink:#171717;
     --body:#4d4d4d;
     --mute:#888888;
     --on-accent:#ffffff;
-    --on-ink:#ffffff;
+
+    --nav-bg:rgba(250,250,250,.82);
+    --logo-shadow:0 8px 24px rgba(0,0,0,.10);
+
+    --e2: 0px 1px 1px #00000005, 0px 2px 2px #0000000a, inset 0 0 0 1px #00000014;
+    --e3: 0px 2px 2px #0000000a, 0px 8px 8px -8px #0000000a, inset 0 0 0 1px #00000014;
+    --e4: 0px 2px 2px #0000000a, 0px 8px 16px -4px #0000000a, inset 0 0 0 1px #00000014;
 
     --xxs:4px; --xs:8px; --sm:12px; --md:16px; --lg:24px;
     --xl:32px; --2xl:40px; --3xl:48px; --4xl:64px;
 
     --r-xs:4px; --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px;
-    --r-pill-sm:64px; --r-pill:100px; --r-full:9999px;
-
-    --e1: inset 0 0 0 1px #00000014;
-    --e2: 0px 1px 1px #00000005, 0px 2px 2px #0000000a, inset 0 0 0 1px #00000014;
-    --e3: 0px 2px 2px #0000000a, 0px 8px 8px -8px #0000000a, inset 0 0 0 1px #00000014;
-    --e4: 0px 2px 2px #0000000a, 0px 8px 16px -4px #0000000a, inset 0 0 0 1px #00000014;
+    --r-pill:100px; --r-full:9999px;
 
     --content:1152px;
   }
+
+  /* ---------------- Dark palette (shared block) ---------------- */
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --accent-text:#F0655D;
+      --accent-soft:#232323;
+      --accent-border:#3a3a3a;
+      --ambient-opacity:.20;
+
+      --canvas:#1b1b1b;
+      --canvas-soft:#121212;
+      --canvas-soft-0:rgba(18,18,18,0);
+      --canvas-soft-2:#222222;
+      --hairline:#2c2c2c;
+
+      --band-dark-bg:#000000;
+      --card-dark-bg:#131313;
+      --card-dark-body:#a8a8a8;
+      --band-callout-bg:#161616;
+      --year-tag-dark-bg:#2a1c1c;
+
+      --ink:#f0f0f0;
+      --body:#b0b0b0;
+      --mute:#858585;
+
+      --nav-bg:rgba(18,18,18,.82);
+      --logo-shadow:0 8px 28px rgba(0,0,0,.55);
+
+      --e2: inset 0 0 0 1px #ffffff14;
+      --e3: 0px 2px 8px #00000059, inset 0 0 0 1px #ffffff14;
+      --e4: 0px 4px 16px #00000066, inset 0 0 0 1px #ffffff1a;
+    }
+    :root:not([data-theme="light"]) .icon-sun{display:block;}
+    :root:not([data-theme="light"]) .icon-moon{display:none;}
+  }
+
+  :root[data-theme="dark"]{
+    --accent-text:#F0655D;
+    --accent-soft:#232323;
+    --accent-border:#3a3a3a;
+    --ambient-opacity:.20;
+
+    --canvas:#1b1b1b;
+    --canvas-soft:#121212;
+    --canvas-soft-0:rgba(18,18,18,0);
+    --canvas-soft-2:#222222;
+    --hairline:#2c2c2c;
+
+    --band-dark-bg:#000000;
+    --card-dark-bg:#131313;
+    --card-dark-body:#a8a8a8;
+    --band-callout-bg:#161616;
+    --year-tag-dark-bg:#2a1c1c;
+
+    --ink:#f0f0f0;
+    --body:#b0b0b0;
+    --mute:#858585;
+
+    --nav-bg:rgba(18,18,18,.82);
+    --logo-shadow:0 8px 28px rgba(0,0,0,.55);
+
+    --e2: inset 0 0 0 1px #ffffff14;
+    --e3: 0px 2px 8px #00000059, inset 0 0 0 1px #ffffff14;
+    --e4: 0px 4px 16px #00000066, inset 0 0 0 1px #ffffff1a;
+  }
+  :root[data-theme="dark"] .icon-sun{display:block;}
+  :root[data-theme="dark"] .icon-moon{display:none;}
 
   *,*::before,*::after{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -69,6 +160,7 @@
                 "Malgun Gothic",sans-serif;
     font-size:16px; line-height:24px;
     -webkit-font-smoothing:antialiased;
+    transition:background-color .2s ease, color .2s ease;
   }
   img{max-width:100%;display:block;}
   a{color:inherit;text-decoration:none;}
@@ -78,10 +170,10 @@
   /* ---------- Type scale ---------- */
   .eyebrow{
     font-size:13px;font-weight:500;line-height:16px;letter-spacing:.6px;
-    text-transform:uppercase;color:var(--crimson);
+    text-transform:uppercase;color:var(--accent-text);
     display:inline-flex;align-items:center;gap:var(--sm);margin:0 0 var(--lg);
   }
-  .eyebrow::before{content:"";width:24px;height:2px;background:var(--crimson);flex:none;}
+  .eyebrow::before{content:"";width:24px;height:2px;background:var(--accent-text);flex:none;}
   .eyebrow.on-dark{color:#ff6b63;}
   .eyebrow.on-dark::before{background:#ff6b63;}
 
@@ -105,13 +197,13 @@
 
   /* ---------- Wordmark ---------- */
   .wordmark{font-weight:700;letter-spacing:-.6px;color:var(--ink);}
-  .wordmark .dot{color:var(--crimson);}
-  .wordmark.on-dark{color:var(--on-ink);}
+  .wordmark .dot{color:var(--accent-text);}
+  .wordmark.on-dark{color:var(--on-band);}
 
   /* ---------- Nav ---------- */
   header.nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(250,250,250,.82);
+    background:var(--nav-bg);
     backdrop-filter:saturate(180%) blur(12px);
     border-bottom:1px solid var(--hairline);
   }
@@ -120,12 +212,25 @@
     height:60px;display:flex;align-items:center;justify-content:space-between;gap:var(--lg);
   }
   .nav-inner .wordmark{font-size:18px;}
+  .nav-right{display:flex;align-items:center;gap:var(--lg);}
   .nav-links{display:flex;gap:var(--lg);align-items:center;}
   .nav-links a{
     font-size:14px;font-weight:500;color:var(--body);letter-spacing:-.2px;
     padding:var(--xs) 0;border-bottom:2px solid transparent;transition:.15s;
   }
-  .nav-links a:hover{color:var(--crimson);border-bottom-color:var(--crimson);}
+  .nav-links a:hover{color:var(--accent-text);border-bottom-color:var(--accent-text);}
+
+  .theme-toggle{
+    width:34px;height:34px;flex:none;
+    display:inline-flex;align-items:center;justify-content:center;
+    background:transparent;color:var(--body);
+    border:1px solid var(--hairline);border-radius:var(--r-full);
+    cursor:pointer;transition:.15s;padding:0;
+  }
+  .theme-toggle:hover{color:var(--accent-text);border-color:var(--accent-border);}
+  .theme-toggle svg{width:16px;height:16px;}
+  .icon-sun{display:none;}
+  .icon-moon{display:block;}
 
   /* ---------- Buttons ---------- */
   .btn{
@@ -149,11 +254,11 @@
       radial-gradient(40% 48% at 62% 14%, var(--ambient-violet) 0%, transparent 62%),
       radial-gradient(34% 42% at 84% 26%, var(--ambient-magenta) 0%, transparent 60%),
       radial-gradient(32% 40% at 96% 6%,  var(--ambient-amber) 0%, transparent 58%);
-    filter:blur(110px);opacity:.24;pointer-events:none;
+    filter:blur(110px);opacity:var(--ambient-opacity);pointer-events:none;
   }
   .hero::after{
     content:"";position:absolute;left:0;right:0;bottom:0;height:45%;
-    background:linear-gradient(to bottom, rgba(250,250,250,0) 0%, var(--canvas-soft) 88%);
+    background:linear-gradient(to bottom, var(--canvas-soft-0) 0%, var(--canvas-soft) 88%);
     pointer-events:none;
   }
   .hero-inner{
@@ -161,26 +266,19 @@
     padding:var(--4xl) var(--lg) 72px;
     display:grid;grid-template-columns:1.05fr .95fr;gap:var(--3xl);align-items:center;
   }
-  .hero-logo{
-    width:100%;max-width:420px;margin:0 auto;
-    filter:drop-shadow(0 8px 24px rgba(0,0,0,.10));
-  }
+  .hero-logo{width:100%;max-width:420px;margin:0 auto;filter:drop-shadow(var(--logo-shadow));}
 
-  /* Big ISAAC wordmark */
   .hero-mark{
     font-size:104px;font-weight:700;line-height:1;letter-spacing:-4px;
     margin:0 0 var(--lg);color:var(--ink);
   }
-  .hero-mark .dot{color:var(--crimson);}
+  .hero-mark .dot{color:var(--accent-text);}
 
-  /* Acronym expansion — initials carry the crimson accent */
   .hero-expand{
     font-size:21px;font-weight:600;line-height:30px;letter-spacing:-.5px;
     color:var(--body);margin:0 0 var(--sm);
   }
-  .hero-expand .cap{
-    color:var(--crimson);font-weight:700;font-size:25px;letter-spacing:-.8px;
-  }
+  .hero-expand .cap{color:var(--accent-text);font-weight:700;font-size:25px;letter-spacing:-.8px;}
 
   .hero-tagline{
     font-size:17px;font-weight:500;line-height:26px;letter-spacing:-.3px;
@@ -190,22 +288,17 @@
   }
   .hero-meta{margin-top:var(--xl);}
 
-  /* Contact shown as plain text under the buttons */
-  .hero-contact{
-    margin-top:var(--md);display:flex;flex-wrap:wrap;gap:var(--xs) var(--lg);
-  }
-  .hero-contact span{
-    font-size:14px;line-height:22px;letter-spacing:-.2px;color:var(--body);
-  }
+  .hero-contact{margin-top:var(--md);display:flex;flex-wrap:wrap;gap:var(--xs) var(--lg);}
+  .hero-contact span{font-size:14px;line-height:22px;letter-spacing:-.2px;color:var(--body);}
   .hero-contact .k{color:var(--mute);margin-right:6px;}
   .hero-contact a{border-bottom:1px solid var(--accent-border);transition:.15s;}
-  .hero-contact a:hover{color:var(--crimson);border-bottom-color:var(--crimson);}
+  .hero-contact a:hover{color:var(--accent-text);border-bottom-color:var(--accent-text);}
 
   /* ---------- Sections ---------- */
   section{padding:88px 0;}
   .section-head{max-width:760px;margin-bottom:var(--3xl);}
-  .band-dark{background:var(--ink);color:var(--on-ink);}
-  .band-dark .section-title{color:var(--on-ink);}
+  .band-dark{background:var(--band-dark-bg);color:var(--on-band);}
+  .band-dark .section-title{color:var(--on-band);}
   .band-dark .subtitle,.band-dark .body-sm{color:#bdbdbd;}
   .band-soft{background:var(--canvas);}
 
@@ -214,25 +307,19 @@
   .g2{grid-template-columns:repeat(2,1fr);}
   .g3{grid-template-columns:repeat(3,1fr);}
 
-  .card{
-    background:var(--canvas);border-radius:var(--r-md);padding:var(--lg);
-    box-shadow:var(--e3);
-  }
+  .card{background:var(--canvas);border-radius:var(--r-md);padding:var(--lg);box-shadow:var(--e3);}
   .card.top-rule{border-top:2px solid var(--crimson);}
   .card-dark{
-    background:#1f1f1f;border-radius:var(--r-md);padding:var(--lg);
+    background:var(--card-dark-bg);border-radius:var(--r-md);padding:var(--lg);
     box-shadow:inset 0 0 0 1px #ffffff14;
   }
-  .card-dark .card-title{color:var(--on-ink);}
-  .card-dark .body-sm{color:#b4b4b4;}
+  .card-dark .card-title{color:var(--on-band);}
+  .card-dark .body-sm{color:var(--card-dark-body);}
 
-  .stat-tile{
-    background:var(--canvas);border-radius:var(--r-md);padding:var(--lg);
-    box-shadow:var(--e2);
-  }
+  .stat-tile{background:var(--canvas);border-radius:var(--r-md);padding:var(--lg);box-shadow:var(--e2);}
   .stat-tile .kpi{
     font-size:48px;font-weight:700;line-height:52px;letter-spacing:-1.6px;
-    color:var(--crimson);margin:0 0 var(--xs);
+    color:var(--accent-text);margin:0 0 var(--xs);
   }
   .stat-tile .kpi .unit{font-size:22px;letter-spacing:-.4px;margin-left:2px;}
 
@@ -242,30 +329,26 @@
     display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--xs) var(--sm);
   }
   .callout strong{font-weight:600;}
-  .band-dark .callout{background:#242424;color:#e4e4e4;}
+  .band-dark .callout{background:var(--band-callout-bg);color:#e4e4e4;}
 
   /* ---------- Lists ---------- */
   ul.ticks{list-style:none;margin:0;padding:0;display:grid;gap:var(--sm);}
-  ul.ticks li{
-    position:relative;padding-left:var(--md);
-    font-size:15px;line-height:24px;color:var(--body);
-  }
+  ul.ticks li{position:relative;padding-left:var(--md);font-size:15px;line-height:24px;color:var(--body);}
   ul.ticks li::before{
     content:"";position:absolute;left:0;top:10px;
-    width:5px;height:5px;border-radius:var(--r-full);background:var(--crimson);
+    width:5px;height:5px;border-radius:var(--r-full);background:var(--accent-text);
   }
-  .card-dark ul.ticks li{color:#b4b4b4;}
+  .card-dark ul.ticks li{color:var(--card-dark-body);}
 
   .year-tag{
-    display:inline-block;background:var(--accent-soft);color:var(--crimson-deep);
+    display:inline-block;background:var(--year-tag-dark-bg);color:#ff6b63;
     font-size:12px;font-weight:600;letter-spacing:.6px;
     padding:4px 10px;border-radius:var(--r-xs);margin-bottom:var(--md);
   }
-  .band-dark .year-tag{background:#2a2020;color:#ff6b63;}
 
   .award{
     display:inline-flex;align-items:center;gap:6px;margin-top:var(--sm);
-    font-size:13px;font-weight:600;color:var(--crimson);
+    font-size:13px;font-weight:600;color:#ff6b63;
   }
 
   /* ---------- Contact ---------- */
@@ -275,13 +358,12 @@
     box-shadow:var(--e4);display:flex;flex-direction:column;gap:var(--xs);
   }
   .contact-card .value{
-    font-size:20px;font-weight:600;letter-spacing:-.4px;color:var(--ink);
-    word-break:break-all;
+    font-size:20px;font-weight:600;letter-spacing:-.4px;color:var(--ink);word-break:break-all;
   }
-  .contact-card a.value:hover{color:var(--crimson);}
+  .contact-card a.value:hover{color:var(--accent-text);}
 
   /* ---------- Footer ---------- */
-  footer{background:var(--ink);color:var(--on-ink);padding:var(--3xl) 0 var(--xl);}
+  footer{background:var(--band-dark-bg);color:var(--on-band);padding:var(--3xl) 0 var(--xl);}
   .footer-inner{
     max-width:var(--content);margin:0 auto;padding:0 var(--lg);
     display:flex;flex-wrap:wrap;gap:var(--md);
@@ -301,6 +383,7 @@
     .subtitle{font-size:18px;line-height:26px;}
     .g3,.g2,.contact-grid{grid-template-columns:1fr;}
     section{padding:64px 0;}
+    .nav-right{gap:var(--md);}
     .nav-links{gap:var(--md);}
     .nav-links a{font-size:13px;}
   }
@@ -319,12 +402,25 @@
 <header class="nav">
   <div class="nav-inner">
     <a href="#top" class="wordmark">ISAAC<span class="dot">.</span></a>
-    <nav class="nav-links">
-      <a href="#about">동아리 소개</a>
-      <a href="#activities">활동</a>
-      <a href="#recruit">모집</a>
-      <a href="#contact">문의</a>
-    </nav>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#about">동아리 소개</a>
+        <a href="#activities">활동</a>
+        <a href="#recruit">모집</a>
+        <a href="#contact">문의</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="밝은 화면과 어두운 화면 전환">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -371,18 +467,15 @@
 
     <div class="grid g2" style="margin-bottom:var(--lg);">
       <div class="card top-rule">
-        <h3 class="card-title">프로젝트 진행 구성</h3>
+        <h3 class="card-title">주요 활동</h3>
         <p class="body-sm" style="margin-bottom:var(--md);">
-          로봇 제작 팀 프로젝트와 로봇 관련 대회 참가를 주요 활동으로 삼습니다.
+          직접 만들고, 함께 공부하고, 밖에 나가 겨룹니다.
         </p>
         <ul class="ticks">
-          <li>설계 — 기구 구조와 CAD 모델링</li>
-          <li>역학 및 제어 — 동역학 해석과 제어기 설계</li>
-          <li>프로그래밍 — 센서 처리와 제어 소프트웨어</li>
+          <li>로봇 제작 팀 프로젝트</li>
+          <li>로봇 관련 스터디</li>
+          <li>로봇 관련 대회 참가</li>
         </ul>
-        <p class="body-sm" style="margin-top:var(--md);">
-          세 분야로 나누어 팀을 구성하고, 한 대의 로봇을 함께 완성합니다.
-        </p>
       </div>
 
       <div class="card top-rule">
@@ -391,7 +484,7 @@
           아이디어를 실제 하드웨어로 옮길 수 있는 공간과 예산을 지원받습니다.
         </p>
         <ul class="ticks">
-          <li>로보틱스 실험실 내 전용 작업 공간</li>
+          <li>기계로봇공학동 전용 작업 공간</li>
           <li>매해 120만원 규모의 동아리 예산 지원</li>
           <li>개인 프로젝트에도 비용 지원 가능</li>
         </ul>
@@ -404,8 +497,8 @@
         <p class="label-mono">연간 예산 지원</p>
       </div>
       <div class="stat-tile">
-        <p class="kpi">3<span class="unit">분야</span></p>
-        <p class="label-mono">설계 · 역학 및 제어 · 프로그래밍</p>
+        <p class="kpi">2<span class="unit">위</span></p>
+        <p class="label-mono">2025 GIST AI창의융합경진대회</p>
       </div>
       <div class="stat-tile">
         <p class="kpi">0<span class="unit">개</span></p>
@@ -534,6 +627,26 @@
     <p class="caption">© 2026 ISAAC, GIST</p>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("themeToggle");
+    if (!btn) return;
+
+    function currentTheme() {
+      var attr = root.getAttribute("data-theme");
+      if (attr === "dark" || attr === "light") return attr;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    btn.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("isaac-theme", next); } catch (e) {}
+    });
+  })();
+</script>
 
 </body>
 </html>
