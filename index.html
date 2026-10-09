@@ -85,7 +85,7 @@
 
   *,*::before,*::after{box-sizing:border-box}
   html{scroll-behavior:smooth;scroll-padding-top:84px}
-  body{margin:0;background:var(--canvas-soft);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:26px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{margin:0;background:var(--canvas-soft);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:26px;-webkit-font-smoothing:antialiased;overflow-x:hidden;word-break:keep-all}
   h1,h2,h3,p,figure,dl,dd{margin:0}
   h1,h2,h3{text-wrap:balance}
   img{max-width:100%;height:auto;display:block}
@@ -184,13 +184,13 @@
   .hero .amb i:nth-child(5){left:780px;top:360px;width:220px;height:200px;background:#F9CB28}
   .hero-in{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
   .hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:24px}
-  .mark{display:flex;font-size:clamp(76px,11vw,140px);line-height:.86;font-weight:700;letter-spacing:-.055em;color:var(--ink);padding-bottom:.04em}
+  .mark{display:flex;font-size:clamp(76px,11vw,140px);line-height:.86;font-weight:700;letter-spacing:-.055em;color:var(--ink);padding-top:.14em;margin-top:-.14em;padding-bottom:.04em}
   .mark span{display:inline-block;transition:transform .6s var(--ease-spring)}
   .mark span:last-child{color:var(--accent-text)}
   .fine .mark span:hover{transform:translateY(-8%)}
-  .motion .mark{overflow:hidden}
+  .motion .mark:not(.open){overflow:hidden}
   .motion .mark span{animation:lineRise 1s var(--ease-out) backwards;animation-delay:calc(var(--i) * 60ms)}
-  @keyframes lineRise{from{transform:translateY(108%)}}
+  @keyframes lineRise{from{transform:translateY(130%)}}
   .expand{font-size:20px;line-height:30px;font-weight:500;letter-spacing:-.3px;color:var(--body)}
   .expand b{color:var(--accent-text);font-weight:700}
   .hero-copy .lead{max-width:30em;color:var(--ink)}
@@ -205,17 +205,11 @@
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}}
   @keyframes fadeIn{from{opacity:0}}
   .logo-box{position:relative;justify-self:center;width:100%;max-width:460px}
-  .logo-tilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .9s var(--ease-out)}
-  .fine .logo-tilt:hover{transition-duration:.25s}
-  .logo-par{transition:transform 1.6s var(--ease-out)}
   .logo-img{width:100%;filter:var(--logo-shadow)}
-  .motion .logo-img{animation:fadeIn 1.2s var(--ease-out) .2s both,float 6s var(--ease-in-out) 1.4s infinite alternate}
-  @keyframes float{from{transform:translateY(0) rotate(0)}to{transform:translateY(-12px) rotate(-1.2deg)}}
+  .motion .logo-img{animation:fadeIn 1.2s var(--ease-out) .2s both}
   .showcase{position:relative;margin-top:72px}
   .motion .showcase figure{animation:fadeIn 1.2s var(--ease-out) .5s both}
-  .frame{position:relative;border-radius:28px;background:var(--canvas);box-shadow:var(--raised);padding:10px;transform-origin:50% 40%;will-change:transform}
-  .glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(640px circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.07),transparent 60%);opacity:0;transition:opacity var(--dur-slow) ease;z-index:2}
-  .fine .frame:hover .glare{opacity:1}
+  .frame{position:relative;border-radius:28px;background:var(--canvas);box-shadow:var(--raised);padding:10px;transform-origin:50% 0;will-change:transform}
   .mosaic{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border-radius:20px;overflow:hidden;aspect-ratio:2/1;background:var(--canvas-soft-2)}
   .mosaic div{position:relative;overflow:hidden;min-height:0}
   .mosaic img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease-out),filter var(--dur-slow) ease}
@@ -283,7 +277,7 @@
   .facts{display:flex;flex-direction:column;margin-top:auto}
   .facts div{padding:14px 0;border-top:1px solid var(--hairline)}
   .facts dt{font-size:13px;line-height:18px;font-weight:500;color:var(--mute)}
-  .facts dd{font-size:17px;line-height:24px;font-weight:600;letter-spacing:-.3px;margin-top:2px}
+  .facts dd{font-size:17px;line-height:24px;font-weight:600;letter-spacing:-.3px;margin-top:2px;text-wrap:balance}
 
   /* ---------- activities ---------- */
   .year{display:flex;align-items:center;gap:20px;margin:0 0 20px}
@@ -324,26 +318,6 @@
   .row:hover .row-arrow span + span,.row:focus-visible .row-arrow span + span{transform:none}
   @media (max-width:760px){.row{grid-template-columns:28px minmax(0,1fr) 42px;gap:12px;min-height:0;padding-block:22px}.row-meta{display:none}.row-main strong{font-size:22px;line-height:28px;letter-spacing:-.6px}.row-arrow{width:42px;height:42px}}
   .more{display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-size:15px;font-weight:600;color:var(--accent-text)}
-  .peek{position:fixed;left:0;top:0;z-index:40;width:300px;height:200px;pointer-events:none;opacity:0;transition:opacity var(--dur-base) ease;will-change:transform}
-  .peek.on{opacity:1}
-  .peek-box{width:100%;height:100%;border-radius:18px;overflow:hidden;box-shadow:var(--floating);background:var(--canvas);transform:scale(.55);transition:transform var(--dur-slow) var(--ease-spring)}
-  .peek.on .peek-box{transform:scale(1)}
-  .peek-reel{height:400%;transition:transform .7s var(--ease-out)}
-  .pv{position:relative;height:25%;overflow:hidden}
-  .pv img{width:100%;height:100%;object-fit:cover}
-  .pv-dark{background:#0f0f0f;color:#ededed}
-  .pv-dark .ember{background:radial-gradient(ellipse 68% 80% at 50% 100%,#BF2B25 0%,#7B1815 30%,rgba(79,16,14,.85) 58%,rgba(79,16,14,0) 100%)}
-  .pv-dark small,.pv-light small{position:absolute;left:20px;top:22px;font-size:11px;line-height:14px;font-weight:500}
-  .pv-dark small{color:#a3a3a3}
-  .pv-dark p,.pv-light p{position:absolute;left:20px;top:40px;font-size:30px;line-height:1.05;font-weight:700;letter-spacing:-1px}
-  .pv-light{background:var(--canvas-soft);color:var(--ink)}
-  .pv-light small{color:var(--body)}
-  .pv-light .amb{right:-60px;top:-60px;width:360px;height:260px;--blur:40px;opacity:.5}
-  .pv-light .amb i:nth-child(1){left:0;top:110px;width:140px;height:120px;background:#007CF0}
-  .pv-light .amb i:nth-child(2){left:90px;top:40px;width:130px;height:110px;background:#00DFD8}
-  .pv-light .amb i:nth-child(3){left:170px;top:130px;width:140px;height:120px;background:#7928CA}
-  .pv-light .amb i:nth-child(4){left:240px;top:60px;width:110px;height:100px;background:#FF0080}
-  @media (max-width:760px){.peek{display:none}}
 
   /* ---------- marquee ---------- */
   .marquee{margin-top:128px;overflow:hidden;border-block:1px solid var(--hairline);padding-block:30px;user-select:none}
@@ -368,10 +342,11 @@
 
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--hairline);padding-block:56px 32px;overflow:hidden;margin-top:128px}
-  .mega{display:flex;font-size:clamp(76px,23vw,300px);line-height:.82;font-weight:700;letter-spacing:-.06em;color:var(--ink);overflow:hidden;padding-bottom:.06em;margin-bottom:28px}
+  .mega{display:flex;font-size:clamp(76px,23vw,300px);line-height:.82;font-weight:700;letter-spacing:-.06em;color:var(--ink);overflow:hidden;padding-top:.14em;margin-top:-.14em;padding-bottom:.06em;margin-bottom:28px}
+  .mega.open{overflow:visible}
   .mega span{display:inline-block;transition:transform .9s var(--ease-out)}
   .mega span:last-child{color:var(--accent-text)}
-  .motion footer .mega span{transform:translateY(105%);transition-delay:calc(var(--i,0) * 50ms)}
+  .motion footer .mega span{transform:translateY(130%);transition-delay:calc(var(--i,0) * 50ms)}
   .motion footer.in .mega span{transform:none}
   .motion footer.done .mega span{transition:transform .6s var(--ease-spring);transition-delay:0s}
   .fine footer.done .mega span:hover{transform:translateY(-9%)}
@@ -418,7 +393,7 @@
       <div class="hero-copy">
         <h1 class="mark" aria-label="ISAAC."><span style="--i:0" aria-hidden="true">I</span><span style="--i:1" aria-hidden="true">S</span><span style="--i:2" aria-hidden="true">A</span><span style="--i:3" aria-hidden="true">A</span><span style="--i:4" aria-hidden="true">C</span><span style="--i:5" aria-hidden="true">.</span></h1>
         <p class="expand"><b>I</b>ntelligent <b>S</b>ystem <b>A</b>nd <b>A</b>utomatic <b>C</b>ontrol</p>
-        <p class="lead">GIST 기계로봇공학과 소속 로봇 학술 동아리입니다. 직접 만들고, 함께 공부하고, 밖에 나가 겨룹니다.</p>
+        <p class="lead">GIST 기계로봇공학과의 로봇 학술 동아리입니다. 머릿속 아이디어를 실제로 움직이는 로봇으로 만듭니다.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="https://instagram.com/isaac_robotics" target="_blank" rel="noopener" data-magnetic>인스타그램 <span class="arr ne" aria-hidden="true">↗</span></a>
           <a class="btn btn-secondary" href="mailto:gist.isaac.robotics@gmail.com">이메일 문의</a>
@@ -426,11 +401,7 @@
         <p class="contact-line"><span><span class="k">Instagram</span><a href="https://instagram.com/isaac_robotics" target="_blank" rel="noopener"><span class="u">@isaac_robotics</span></a></span><span><span class="k">Email</span><a href="mailto:gist.isaac.robotics@gmail.com"><span class="u">gist.isaac.robotics@gmail.com</span></a></span></p>
       </div>
       <div class="logo-box">
-        <div class="logo-par">
-          <div class="logo-tilt" data-tilt="12">
-            <img class="logo-img" src="assets/logo.png" width="900" height="681" alt="ISAAC — GIST Robotics Club 로고" />
-          </div>
-        </div>
+        <img class="logo-img" src="assets/logo.png" width="900" height="681" alt="ISAAC — GIST Robotics Club 로고" />
       </div>
     </div>
     <div class="wrap showcase">
@@ -444,9 +415,8 @@
             <div><img src="assets/proj-biped.jpg" width="1000" height="750" alt="서보 모터로 조립한 이족보행 로봇의 다리 구조" /><span>이족보행 로봇 · 2024</span></div>
             <div><img src="assets/proj-maze.jpg" width="1000" height="750" alt="3D 프린팅 차체의 미로탐색 로봇" /><span>미로탐색 로봇 · 2024</span></div>
           </div>
-          <div class="glare" aria-hidden="true"></div>
         </div>
-        <figcaption class="label mute cap">2024–2025 ISAAC이 만든 것들.<span class="fine-only"> 사진에 커서를 올리면 이름이 보입니다.</span></figcaption>
+        <figcaption class="label mute cap">2024–2025, ISAAC이 만든 로봇들.<span class="fine-only"> 사진에 커서를 올리면 이름이 보입니다.</span></figcaption>
       </figure>
     </div>
   </section>
@@ -455,40 +425,40 @@
   <section class="block" id="about">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="title" data-reveal>We're ISAAC.</h2>
-        <p data-reveal style="--i:1">GIST 기계로봇공학과 소속 로봇 학술 동아리입니다. 로봇 제작 팀 프로젝트와 스터디, 대회 참가를 함께합니다.</p>
+        <h2 class="title" data-reveal>만들면서 배웁니다.</h2>
+        <p data-reveal style="--i:1">팀을 꾸려 로봇을 설계하고 만듭니다. 필요한 것은 함께 공부하고, 완성한 로봇으로 대회에 나갑니다.</p>
       </div>
       <div class="grid g3" data-stagger>
         <div class="cell tall span2">
           <div class="cell-amb" aria-hidden="true" data-parallax="60"><i></i><i></i><i></i><i></i></div>
-          <span class="label mute n">우리가 하는 일</span>
+          <span class="label mute n">ISAAC의 방식</span>
           <p class="big-word">직접 만들고,<br>함께 <span class="accent">겨룹니다</span>.</p>
         </div>
         <div class="cell tall">
           <span class="label mute n">한눈에</span>
           <dl class="facts">
-            <div><dt>연간 예산 지원</dt><dd class="num">120만원</dd></div>
-            <div><dt>최근 수상</dt><dd>2025 GIST AI창의융합경진대회 2위</dd></div>
-            <div><dt>필요한 사전 지식</dt><dd>없음</dd></div>
+            <div><dt>연간 동아리 예산</dt><dd class="num">120만원</dd></div>
+            <div><dt>최근 수상</dt><dd>2025 GIST AI창의융합경진대회 탁구 로봇 부문 2위</dd></div>
+            <div><dt>시작할 때 필요한 지식</dt><dd>없습니다</dd></div>
           </dl>
         </div>
         <div class="cell tall">
           <span class="label mute n">주요 활동</span>
-          <h3 class="subheading">만들고, 공부하고, 겨룹니다</h3>
+          <h3 class="subheading">팀 프로젝트, 스터디, 대회.</h3>
           <ul class="list">
-            <li>로봇 제작 팀 프로젝트</li>
-            <li>로봇 관련 스터디</li>
-            <li>로봇 관련 대회 참가</li>
+            <li>팀 단위 로봇 제작 프로젝트</li>
+            <li>제작에 필요한 주제를 함께 공부하는 스터디</li>
+            <li>완성한 로봇으로 대회 출전</li>
           </ul>
         </div>
         <div class="cell tall span2">
           <div class="cell-lines" aria-hidden="true" data-local></div>
           <span class="label mute n">작업 환경</span>
-          <h3 class="subheading">아이디어를 하드웨어로 옮길 공간과 예산</h3>
+          <h3 class="subheading">만들 공간과 예산이 있습니다.</h3>
           <ul class="list">
-            <li>기계로봇공학동 전용 작업 공간</li>
-            <li>매해 120만원 규모의 동아리 예산 지원</li>
-            <li>개인 프로젝트에도 비용 지원 가능</li>
+            <li>기계로봇공학동 안의 전용 작업 공간</li>
+            <li>해마다 120만원 규모의 동아리 예산</li>
+            <li>개인 프로젝트도 비용 지원 가능</li>
           </ul>
         </div>
       </div>
@@ -499,8 +469,8 @@
   <section class="block" id="activities">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="title" data-reveal>지난 ISAAC 활동</h2>
-        <p data-reveal style="--i:1">해마다 팀을 꾸려 로봇을 만들고 대회에 나갑니다. 완성하지 못한 프로젝트도 그대로 남겨 둡니다. 되지 않은 이유를 아는 것이 다음 로봇의 출발점이 되기 때문입니다.</p>
+        <h2 class="title" data-reveal>지금까지 만든 것.</h2>
+        <p data-reveal style="--i:1">완성하지 못한 로봇도 지우지 않고 남겨 둡니다. 왜 안 됐는지 아는 것이 다음 로봇의 출발점이 되기 때문입니다.</p>
       </div>
 
       <div class="year" data-reveal><span class="year-n num">2025</span><span class="year-line"></span><span class="label mute">3개 프로젝트</span></div>
@@ -509,24 +479,24 @@
           <div class="ph"><img src="assets/proj-pingpong.jpg" width="1000" height="750" loading="lazy" alt="탁구대 앞에 설치된 탁구 로봇의 라켓 구동부" /></div>
           <div class="pc">
             <div class="tags"><span class="tag win"><i></i>2위 수상</span></div>
-            <h3 class="subheading">GIST AI창의융합경진대회</h3>
-            <p class="small">탁구 로봇 부문에 탁구 로봇을 제작해 출전했습니다.</p>
+            <h3 class="subheading">탁구 로봇</h3>
+            <p class="small">GIST AI창의융합경진대회 탁구 로봇 부문에 직접 만든 로봇으로 출전해 2위를 했습니다.</p>
           </div>
         </article>
         <article class="cell photo">
           <div class="ph"><img src="assets/proj-drawing.jpg" width="1000" height="750" loading="lazy" alt="X-Y 플로터가 종이에 ISAAC 로고 도안을 그리고 있는 모습" /></div>
           <div class="pc">
             <div class="tags"></div>
-            <h3 class="subheading">드로잉 머신 제작</h3>
-            <p class="small">X-Y 플로터를 기반으로, 입력한 도안을 그려내는 기계를 만들었습니다.</p>
+            <h3 class="subheading">드로잉 머신</h3>
+            <p class="small">X-Y 플로터를 바탕으로, 입력한 도안을 종이 위에 그려 내는 기계입니다.</p>
           </div>
         </article>
         <article class="cell photo">
           <div class="ph"><img src="assets/proj-claw.jpg" width="1000" height="750" loading="lazy" alt="인형 뽑기 기계의 3D 설계 렌더링" /></div>
           <div class="pc">
-            <div class="tags"><span class="tag"><i></i>제작 진행 중</span></div>
+            <div class="tags"><span class="tag"><i></i>제작 중</span></div>
             <h3 class="subheading">인형 뽑기 기계</h3>
-            <p class="small">설계를 마치고 제작에 착수했습니다.</p>
+            <p class="small">설계를 마치고 지금 만들고 있습니다.</p>
           </div>
         </article>
       </div>
@@ -537,24 +507,24 @@
           <div class="ph"><img src="assets/proj-expo.jpg" width="1000" height="750" loading="lazy" alt="기계공학부 연구발표회에 전시된 ISAAC 부스" /></div>
           <div class="pc">
             <div class="tags"></div>
-            <h3 class="subheading">기계공학부 연구발표회 참여</h3>
-            <p class="small">한 해 동안의 제작 결과를 학부 연구발표회에서 발표했습니다.</p>
+            <h3 class="subheading">기계공학부 연구발표회</h3>
+            <p class="small">한 해 동안 만든 결과물을 학부 연구발표회에서 발표했습니다.</p>
           </div>
         </article>
         <article class="cell photo">
           <div class="ph"><img src="assets/proj-biped.jpg" width="1000" height="750" loading="lazy" alt="서보 모터로 조립한 이족보행 로봇의 다리 구조" /></div>
           <div class="pc">
             <div class="tags"><span class="tag"><i></i>미완성</span></div>
-            <h3 class="subheading">이족보행 로봇 제작</h3>
-            <p class="small">두 다리로 걷는 로봇에 도전했습니다. 완성에는 이르지 못했습니다.</p>
+            <h3 class="subheading">이족보행 로봇</h3>
+            <p class="small">두 다리로 걷는 로봇에 도전했습니다. 끝까지 걷게 만들지는 못했습니다.</p>
           </div>
         </article>
         <article class="cell photo">
           <div class="ph"><img src="assets/proj-maze.jpg" width="1000" height="750" loading="lazy" alt="3D 프린팅 차체에 눈알 스티커를 붙인 미로탐색 로봇" /></div>
           <div class="pc">
             <div class="tags"></div>
-            <h3 class="subheading">미로탐색 로봇 제작</h3>
-            <p class="small">트레모(Trémaux) 알고리즘을 적용해 미로를 스스로 빠져나오는 로봇을 만들었습니다.</p>
+            <h3 class="subheading">미로탐색 로봇</h3>
+            <p class="small">트레모(Trémaux) 알고리즘으로 미로를 스스로 빠져나오는 로봇입니다.</p>
           </div>
         </article>
       </div>
@@ -565,10 +535,10 @@
   <section class="block" id="code">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="title" data-reveal>코드</h2>
-        <p data-reveal style="--i:1">프로젝트의 코드와 해설은 GitHub에 공개합니다.<span class="fine-only"> 줄에 커서를 올리면 미리보기가 따라옵니다.</span></p>
+        <h2 class="title" data-reveal>코드도 공개합니다.</h2>
+        <p data-reveal style="--i:1">프로젝트 코드와 해설은 GitHub에 올려 둡니다. 저장소 이름을 누르면 바로 열립니다.</p>
       </div>
-      <div class="rows" data-stagger data-peek>
+      <div class="rows" data-stagger>
         <a class="row" href="https://github.com/GIST-ISAAC-Robotics/2026-IT-ARENA" target="_blank" rel="noopener">
           <span class="row-i">01</span>
           <span class="row-main"><strong>IT ARENA</strong><span>자율주행 차량의 센서 구성과 제어를 다루는 IT ARENA 프로젝트</span></span>
@@ -611,32 +581,32 @@
     <div class="wrap">
       <div class="sec-head">
         <div>
-          <p class="status" data-reveal><i></i>다음 모집 일정 미정</p>
-          <h2 class="display" data-reveal style="--i:1">Welcome!</h2>
+          <p class="status" data-reveal><i></i>다음 모집 · 일정 미정</p>
+          <h2 class="display" data-reveal style="--i:1">함께 만들<br>사람을 찾습니다.</h2>
         </div>
-        <p data-reveal style="--i:2">로봇에 관심 있는 누구나 함께할 수 있습니다. 전공은 상관없고, 입문자를 환영합니다.</p>
+        <p data-reveal style="--i:2">전공은 상관없습니다. 로봇에 관심이 있다면 처음이어도 괜찮습니다.</p>
       </div>
       <div class="grid g2" data-stagger>
         <div class="cell">
-          <span class="label">이런 분을 기다립니다</span>
+          <span class="label">이런 분과 함께하고 싶습니다</span>
           <ul class="list">
-            <li>전공과 상관없이, 관심만 있어도 괜찮습니다</li>
-            <li>입문자를 환영합니다. 부담 없는 가벼운 활동입니다</li>
-            <li>나만의 프로젝트를 진행할 수 있고, 비용 지원도 가능합니다</li>
-            <li>선배들과 자연스럽게 친목을 쌓을 수 있습니다</li>
+            <li>전공과 관계없이 로봇에 관심 있는 분</li>
+            <li>로봇을 처음 만들어 보는 분. 부담 없는 활동부터 시작합니다</li>
+            <li>만들고 싶은 것이 있는 분. 개인 프로젝트도 비용을 지원합니다</li>
+            <li>선후배와 편하게 어울리고 싶은 분</li>
           </ul>
         </div>
         <div class="cell">
-          <span class="label">우대 사항</span>
-          <p class="small" style="margin-top:16px">필수는 아닙니다. 없어도 지원하셔도 됩니다.</p>
+          <span class="label">있으면 좋은 경험</span>
+          <p class="small" style="margin-top:16px">없어도 지원할 수 있습니다.</p>
           <ul class="list">
-            <li>전자회로 및 기타 하드웨어 제어 경험자</li>
-            <li>CAD 경험자</li>
+            <li>전자회로나 하드웨어 제어</li>
+            <li>CAD 설계</li>
           </ul>
         </div>
       </div>
       <div class="recruit-foot" data-reveal>
-        <p>다음 모집 일정은 아직 정해지지 않았습니다. 일정이 확정되면 인스타그램 계정을 통해 안내드립니다.</p>
+        <p>다음 모집 일정은 정해지는 대로 인스타그램에 올립니다.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="https://instagram.com/isaac_robotics" target="_blank" rel="noopener" data-magnetic>인스타그램에서 소식 받기 <span class="arr ne" aria-hidden="true">↗</span></a>
           <a class="btn btn-secondary" href="mailto:gist.isaac.robotics@gmail.com">이메일 문의</a>
@@ -649,13 +619,13 @@
   <section class="block" id="contact">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="title" data-reveal>문의</h2>
-        <p data-reveal style="--i:1">궁금한 점이 있으시면 편하게 연락 주십시오.</p>
+        <h2 class="title" data-reveal>편하게 연락 주세요.</h2>
+        <p data-reveal style="--i:1">동아리 활동, 모집, 협업 모두 메일이나 인스타그램으로 받습니다.</p>
       </div>
       <div class="rows" data-stagger>
         <a class="row" href="mailto:gist.isaac.robotics@gmail.com">
           <span class="row-i">01</span>
-          <span class="row-main"><strong>gist.isaac.robotics<wbr>@gmail.com</strong><span>문의 및 제휴</span></span>
+          <span class="row-main"><strong>gist.isaac.robotics<wbr>@gmail.com</strong><span>문의와 제휴</span></span>
           <span class="row-meta">Email</span>
           <span class="row-arrow" aria-hidden="true"><span>↗</span><span>↗</span></span>
         </a>
@@ -680,16 +650,6 @@
   </div>
 </footer>
 
-<div class="peek" aria-hidden="true">
-  <div class="peek-box">
-    <div class="peek-reel">
-      <div class="pv pv-dark"><div class="ember"></div><small>2026 · 자율주행</small><p>IT ARENA</p></div>
-      <div class="pv pv-light"><div class="amb"><i></i><i></i><i></i><i></i></div><small>ROS 2 스터디</small><p>Pick &amp;<br>Place</p></div>
-      <div class="pv"><img src="assets/proj-drawing.jpg" width="1000" height="750" alt="" loading="lazy" /></div>
-      <div class="pv"><img src="assets/proj-pingpong.jpg" width="1000" height="750" alt="" loading="lazy" /></div>
-    </div>
-  </div>
-</div>
 
 <script>
 (function () {
@@ -764,7 +724,7 @@
       es.forEach(function (en) {
         if (!en.isIntersecting) return;
         var t = en.target; t.classList.add("in"); rio.unobserve(t);
-        if (t.tagName === "FOOTER") setTimeout(function () { t.classList.add("done"); }, 1400);
+        if (t.tagName === "FOOTER") setTimeout(function () { t.classList.add("done"); $(".mega").classList.add("open"); }, 1400);
         if (t.hasAttribute("data-reveal")) {
           /* once revealed, hand the element back to its own hover transitions */
           var i = parseFloat(getComputedStyle(t).getPropertyValue("--i")) || 0;
@@ -777,14 +737,13 @@
   } else {
     revealables.forEach(function (el) { el.classList.add("in", "done"); });
   }
+  /* release the clip around the big wordmarks once their letters have risen, so a lifted letter keeps its top */
+  if (motion) setTimeout(function () { $(".mark").classList.add("open"); }, 1500); else { $(".mark").classList.add("open"); $(".mega").classList.add("open"); }
 
   if (!motion) return;
 
   /* ---------- pointer effects (mouse only) ---------- */
-  var mouse = { x: -200, y: -200 };
   if (fine) {
-    addEventListener("pointermove", function (e) { if (e.pointerType !== "mouse") return; mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
-
     /* grid: line light, cell spotlight, local layers */
     $$(".grid").forEach(function (g) {
       g.addEventListener("pointermove", function (e) {
@@ -798,37 +757,19 @@
       g.addEventListener("pointerleave", function () { $$("[data-parallax]", g).forEach(function (el) { el.style.transform = ""; }); });
     });
 
-    /* hero: ambient drifts toward the cursor, logo moves the other way */
-    var hero = $(".hero"), hamb = $(".hero .amb"), lpar = $(".logo-par");
+    /* hero: ambient light drifts toward the cursor */
+    var hero = $(".hero"), hamb = $(".hero .amb");
     hero.addEventListener("pointermove", function (e) {
       var r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
       hamb.style.transform = "translate(" + (x * 90).toFixed(1) + "px," + (y * 60).toFixed(1) + "px)";
-      lpar.style.transform = "translate(" + (-x * 18).toFixed(1) + "px," + (-y * 14).toFixed(1) + "px)";
     }, { passive: true });
-    hero.addEventListener("pointerleave", function () { hamb.style.transform = ""; lpar.style.transform = ""; });
-
-    /* tilt */
-    $$("[data-tilt]").forEach(function (el) {
-      var k = +el.getAttribute("data-tilt") || 6;
-      el.addEventListener("pointermove", function (e) {
-        var r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-        el.style.setProperty("--ry", ((x - .5) * k).toFixed(2) + "deg"); el.style.setProperty("--rx", ((.5 - y) * k).toFixed(2) + "deg");
-      }, { passive: true });
-      el.addEventListener("pointerleave", function () { el.style.setProperty("--rx", "0deg"); el.style.setProperty("--ry", "0deg"); });
-    });
+    hero.addEventListener("pointerleave", function () { hamb.style.transform = ""; });
 
     /* magnetic buttons */
     $$("[data-magnetic]").forEach(function (b) {
       b.addEventListener("pointermove", function (e) { var r = b.getBoundingClientRect(); b.style.setProperty("--tx", ((e.clientX - r.left - r.width / 2) * .14).toFixed(1) + "px"); b.style.setProperty("--ty", ((e.clientY - r.top - r.height / 2) * .2).toFixed(1) + "px"); }, { passive: true });
       b.addEventListener("pointerleave", function () { b.style.setProperty("--tx", "0px"); b.style.setProperty("--ty", "0px"); });
     });
-
-    /* code rows: floating preview */
-    var peek = $(".peek"), reel = $(".peek-reel"), peekRows = $("[data-peek]"), pk = { x: 0, y: 0, r: 0, on: false };
-    $$(".row", peekRows).forEach(function (row, i) {
-      row.addEventListener("pointerenter", function (e) { if (!pk.on) { pk.x = e.clientX; pk.y = e.clientY; } pk.on = true; peek.classList.add("on"); reel.style.transform = "translateY(" + (-i * 25) + "%)"; });
-    });
-    peekRows.addEventListener("pointerleave", function () { pk.on = false; peek.classList.remove("on"); });
   }
 
   /* ember follows the pointer inside its zone */
@@ -838,12 +779,8 @@
     f.zone.addEventListener("pointerleave", function () { f.t = 0; });
   });
 
-  /* showcase frame: scroll-linked rise + pointer tilt */
-  var frameEl = $(".frame"), fig = $(".showcase"), sc = { hx: 0, hy: 0, tx: 0, ty: 0 };
-  if (fine) {
-    frameEl.addEventListener("pointermove", function (e) { var r = frameEl.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height; sc.tx = x - .5; sc.ty = y - .5; frameEl.style.setProperty("--gx", (x * 100).toFixed(1) + "%"); frameEl.style.setProperty("--gy", (y * 100).toFixed(1) + "%"); }, { passive: true });
-    frameEl.addEventListener("pointerleave", function () { sc.tx = 0; sc.ty = 0; });
-  }
+  /* showcase frame: grows from 92% to full size as it scrolls into place */
+  var frameEl = $(".frame"), fig = $(".showcase");
 
   /* marquee: time + scroll velocity */
   var track = $(".mq-track"), mqOn = false, mqHover = false, mqX = 0, skew = 0, vel = 0, lastY = scrollY;
@@ -859,8 +796,7 @@
     var fr = fig.getBoundingClientRect();
     if (fr.bottom > -50 && fr.top < innerHeight + 50) {
       var p = clamp((innerHeight - fr.top) / (innerHeight * .8), 0, 1), e = p * p * (3 - 2 * p);
-      sc.hx += (sc.tx - sc.hx) * .08 * dt; sc.hy += (sc.ty - sc.hy) * .08 * dt;
-      frameEl.style.transform = "perspective(1800px) rotateX(" + ((1 - e) * 18 - sc.hy * 6).toFixed(2) + "deg) rotateY(" + (sc.hx * 8).toFixed(2) + "deg) scale(" + (.9 + .1 * e).toFixed(4) + ")";
+      frameEl.style.transform = "scale(" + (.92 + .08 * e).toFixed(4) + ")";
     }
     followers.forEach(function (f) { var d = f.t - f.x; if (Math.abs(d) > .1) { f.x += d * .05 * dt; f.el.style.transform = "translate3d(" + f.x.toFixed(1) + "px,0,0)"; } });
     if (mqOn) {
@@ -868,12 +804,6 @@
       mqX -= sp * 1.1 * dt; if (mqX <= -half) mqX += half;
       skew += (clamp(-vel * .3, -12, 12) - skew) * .12 * dt;
       track.style.transform = "translate3d(" + mqX.toFixed(1) + "px,0,0) skewX(" + skew.toFixed(2) + "deg)";
-    }
-    if (fine && (pk.on || peek.classList.contains("on"))) {
-      var px = pk.x; pk.x += (mouse.x - pk.x) * .16 * dt; pk.y += (mouse.y - pk.y) * .16 * dt;
-      pk.r += (clamp((pk.x - px) * .5, -9, 9) - pk.r) * .12 * dt;
-      var lx = Math.min(pk.x + 28, innerWidth - 316);
-      peek.style.transform = "translate3d(" + lx.toFixed(1) + "px," + (pk.y - 100).toFixed(1) + "px,0) rotate(" + pk.r.toFixed(2) + "deg)";
     }
     requestAnimationFrame(frame);
   }
