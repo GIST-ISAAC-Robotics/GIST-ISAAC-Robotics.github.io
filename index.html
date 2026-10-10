@@ -175,7 +175,7 @@
   @keyframes breathe{0%,100%{opacity:.86}50%{opacity:1}}
 
   /* ---------- hero ---------- */
-  .hero{position:relative;overflow:hidden;padding-block:96px 0}
+  .hero{position:relative;overflow:hidden;overflow:clip visible;padding-block:96px 40px}
   .hero .amb{right:-160px;top:-240px;width:1000px;height:760px;transition:transform 1.8s var(--ease-out)}
   .hero .amb i:nth-child(1){left:0;top:220px;width:380px;height:320px;background:#007CF0}
   .hero .amb i:nth-child(2){left:250px;top:90px;width:340px;height:280px;background:#00DFD8}
@@ -207,19 +207,8 @@
   .logo-box{position:relative;justify-self:center;width:100%;max-width:460px}
   .logo-img{width:100%;filter:var(--logo-shadow)}
   .motion .logo-img{animation:fadeIn 1.2s var(--ease-out) .2s both}
-  .showcase{position:relative;margin-top:72px}
-  .motion .showcase figure{animation:fadeIn 1.2s var(--ease-out) .5s both}
-  .frame{position:relative;border-radius:28px;background:var(--canvas);box-shadow:var(--raised);padding:10px;transform-origin:50% 0;will-change:transform}
-  .mosaic{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border-radius:20px;overflow:hidden;aspect-ratio:2/1;background:var(--canvas-soft-2)}
-  .mosaic div{position:relative;overflow:hidden;min-height:0}
-  .mosaic img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease-out),filter var(--dur-slow) ease}
-  .fine .mosaic:hover img{filter:saturate(.75) brightness(.9)}
-  .fine .mosaic div:hover img{transform:scale(1.07);filter:none}
-  .mosaic span{position:absolute;left:12px;bottom:10px;font-size:12px;line-height:16px;font-weight:600;color:#fff;padding:4px 10px;border-radius:100px;background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;transform:translateY(6px);transition:opacity var(--dur-base) ease,transform var(--dur-base) var(--ease-out)}
-  .mosaic div:hover span{opacity:1;transform:none}
-  .cap{margin-top:14px}
   @media (max-width:900px){.hero-in{grid-template-columns:1fr;gap:32px}.logo-box{max-width:320px;justify-self:start;order:-1}}
-  @media (max-width:639px){.hero{padding-top:56px}.mosaic{grid-template-columns:repeat(2,1fr);aspect-ratio:auto}.mosaic div{aspect-ratio:4/3}.showcase{margin-top:48px}}
+  @media (max-width:639px){.hero{padding-top:56px}}
 
   /* ---------- reveal ---------- */
   .motion [data-reveal]{opacity:0;transform:translateY(28px);transition:opacity var(--dur-reveal) var(--ease-out),transform var(--dur-reveal) var(--ease-out);transition-delay:calc(var(--i,0) * 70ms)}
@@ -403,21 +392,6 @@
       <div class="logo-box">
         <img class="logo-img" src="assets/logo.png" width="900" height="681" alt="ISAAC — GIST Robotics Club 로고" />
       </div>
-    </div>
-    <div class="wrap showcase">
-      <figure>
-        <div class="frame">
-          <div class="mosaic">
-            <div><img src="assets/proj-pingpong.jpg" width="1000" height="750" alt="탁구대 앞에 설치된 탁구 로봇의 라켓 구동부" /><span>탁구 로봇 · 2025</span></div>
-            <div><img src="assets/proj-drawing.jpg" width="1000" height="750" alt="X-Y 플로터가 종이에 도안을 그리고 있는 모습" /><span>드로잉 머신 · 2025</span></div>
-            <div><img src="assets/proj-claw.jpg" width="1000" height="750" alt="인형 뽑기 기계의 3D 설계 렌더링" /><span>인형 뽑기 기계 · 2025</span></div>
-            <div><img src="assets/proj-expo.jpg" width="1000" height="750" alt="기계공학부 연구발표회에 전시된 ISAAC 부스" /><span>연구발표회 · 2024</span></div>
-            <div><img src="assets/proj-biped.jpg" width="1000" height="750" alt="서보 모터로 조립한 이족보행 로봇의 다리 구조" /><span>이족보행 로봇 · 2024</span></div>
-            <div><img src="assets/proj-maze.jpg" width="1000" height="750" alt="3D 프린팅 차체의 미로탐색 로봇" /><span>미로탐색 로봇 · 2024</span></div>
-          </div>
-        </div>
-        <figcaption class="label mute cap">2024–2025, ISAAC이 만든 로봇들.<span class="fine-only"> 사진에 커서를 올리면 이름이 보입니다.</span></figcaption>
-      </figure>
     </div>
   </section>
 
@@ -779,8 +753,6 @@
     f.zone.addEventListener("pointerleave", function () { f.t = 0; });
   });
 
-  /* showcase frame: grows from 92% to full size as it scrolls into place */
-  var frameEl = $(".frame"), fig = $(".showcase");
 
   /* marquee: time + scroll velocity */
   var track = $(".mq-track"), mqOn = false, mqHover = false, mqX = 0, skew = 0, vel = 0, lastY = scrollY;
@@ -793,11 +765,6 @@
     var dt = Math.min(now - last, 50) / 16.667; last = now;
     var y = scrollY, v = y - lastY; lastY = y; vel += (v - vel) * .2;
 
-    var fr = fig.getBoundingClientRect();
-    if (fr.bottom > -50 && fr.top < innerHeight + 50) {
-      var p = clamp((innerHeight - fr.top) / (innerHeight * .8), 0, 1), e = p * p * (3 - 2 * p);
-      frameEl.style.transform = "scale(" + (.92 + .08 * e).toFixed(4) + ")";
-    }
     followers.forEach(function (f) { var d = f.t - f.x; if (Math.abs(d) > .1) { f.x += d * .05 * dt; f.el.style.transform = "translate3d(" + f.x.toFixed(1) + "px,0,0)"; } });
     if (mqOn) {
       var half = track.scrollWidth / 2, sp = (mqHover ? .2 : 1) * (1 + Math.min(Math.abs(vel) * .15, 7));
