@@ -343,7 +343,22 @@
   .foot{font-size:12px;line-height:16px;font-weight:500;color:var(--mute)}
   a.foot:hover{color:var(--ink)}
 
-  /* ---------- toast-free: theme switch circle reveal ---------- */
+  
+  /* mobile menu */
+  .menu-btn{display:none}
+  .menu-btn svg line{transform-box:view-box;transform-origin:12px 12px;transition:transform var(--dur-base) var(--ease-out),opacity var(--dur-fast) ease}
+  .menu-btn[aria-expanded="true"] .l1{transform:translateY(5px) rotate(45deg)}
+  .menu-btn[aria-expanded="true"] .l2{opacity:0}
+  .menu-btn[aria-expanded="true"] .l3{transform:translateY(-5px) rotate(-45deg)}
+  .m-menu{border-top:1px solid var(--hairline)}
+  .nav .m-menu .wrap{display:flex;flex-direction:column;align-items:stretch;gap:0;height:auto;padding-block:4px 20px}
+  .m-menu a{display:flex;justify-content:space-between;align-items:center;font-size:22px;line-height:30px;font-weight:600;letter-spacing:-.5px;color:var(--ink);padding:14px 0;border-bottom:1px solid var(--hairline)}
+  .m-menu a::after{content:"→";font-weight:400;color:var(--mute)}
+  .motion .m-menu:not([hidden]) a{animation:fadeUp .5s var(--ease-out) backwards;animation-delay:calc(var(--i,0) * 40ms)}
+  @media (max-width:820px){.menu-btn{display:inline-flex}}
+  @media (min-width:821px){.m-menu{display:none!important}}
+  
+  /* ---------- theme switch: circle reveal ---------- */
   ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
   ::view-transition-old(root){z-index:1}
   ::view-transition-new(root){z-index:2}
@@ -369,8 +384,10 @@
       <svg viewBox="0 0 24 24" aria-hidden="true" id="iconMoon"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
       <svg viewBox="0 0 24 24" aria-hidden="true" id="iconSun" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
-    <a class="btn btn-primary btn-sm" href="#recruit">모집 안내</a>
+    <a class="btn btn-secondary btn-sm" href="#recruit">모집 안내</a>
+    <button class="btn icon-btn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mMenu" aria-label="메뉴 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><line class="l1" x1="4" y1="7" x2="20" y2="7"/><line class="l2" x1="4" y1="12" x2="20" y2="12"/><line class="l3" x1="4" y1="17" x2="20" y2="17"/></svg></button>
   </div>
+  <nav class="m-menu" id="mMenu" aria-label="섹션 메뉴" hidden><div class="wrap"><a href="#about" style="--i:0">소개</a><a href="#activities" style="--i:1">활동</a><a href="#code" style="--i:2">코드</a><a href="#recruit" style="--i:3">모집</a><a href="#contact" style="--i:4">문의</a></div></nav>
   <span class="progress" aria-hidden="true"></span>
 </header>
 
@@ -399,14 +416,14 @@
   <section class="block" id="about">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="title" data-reveal>만들면서 배웁니다.</h2>
+        <h2 class="title" data-reveal>만들면서 배우는 동아리</h2>
         <p data-reveal style="--i:1">팀을 꾸려 로봇을 설계하고 만듭니다. 필요한 것은 함께 공부하고, 완성한 로봇으로 대회에 나갑니다.</p>
       </div>
       <div class="grid g3" data-stagger>
         <div class="cell tall span2">
           <div class="cell-amb" aria-hidden="true" data-parallax="60"><i></i><i></i><i></i><i></i></div>
           <span class="label mute n">ISAAC의 방식</span>
-          <p class="big-word">직접 만들고,<br>함께 <span class="accent">겨룹니다</span>.</p>
+          <p class="big-word">만들고, 배우고,<br><span class="accent">겨루고</span>.</p>
         </div>
         <div class="cell tall">
           <span class="label mute n">한눈에</span>
@@ -418,7 +435,7 @@
         </div>
         <div class="cell tall">
           <span class="label mute n">주요 활동</span>
-          <h3 class="subheading">팀 프로젝트, 스터디, 대회.</h3>
+          <h3 class="subheading">팀 프로젝트, 스터디, 대회</h3>
           <ul class="list">
             <li>팀 단위 로봇 제작 프로젝트</li>
             <li>제작에 필요한 주제를 함께 공부하는 스터디</li>
@@ -428,7 +445,7 @@
         <div class="cell tall span2">
           <div class="cell-lines" aria-hidden="true" data-local></div>
           <span class="label mute n">작업 환경</span>
-          <h3 class="subheading">만들 공간과 예산이 있습니다.</h3>
+          <h3 class="subheading">작업 공간과 예산</h3>
           <ul class="list">
             <li>기계로봇공학동 안의 전용 작업 공간</li>
             <li>해마다 120만원 규모의 동아리 예산</li>
@@ -443,7 +460,7 @@
   <section class="block" id="activities">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="title" data-reveal>지금까지 만든 것.</h2>
+        <h2 class="title" data-reveal>지금까지 만든 것들</h2>
         <p data-reveal style="--i:1">완성하지 못한 로봇도 지우지 않고 남겨 둡니다. 왜 안 됐는지 아는 것이 다음 로봇의 출발점이 되기 때문입니다.</p>
       </div>
 
@@ -509,32 +526,32 @@
   <section class="block" id="code">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="title" data-reveal>코드도 공개합니다.</h2>
+        <h2 class="title" data-reveal>공개한 코드</h2>
         <p data-reveal style="--i:1">프로젝트 코드와 해설은 GitHub에 올려 둡니다. 저장소 이름을 누르면 바로 열립니다.</p>
       </div>
       <div class="rows" data-stagger>
         <a class="row" href="https://github.com/GIST-ISAAC-Robotics/2026-IT-ARENA" target="_blank" rel="noopener">
           <span class="row-i">01</span>
           <span class="row-main"><strong>IT ARENA</strong><span>자율주행 차량의 센서 구성과 제어를 다루는 IT ARENA 프로젝트</span></span>
-          <span class="row-meta">2026.08.30<br>2026-IT-ARENA</span>
+          <span class="row-meta">2026<br>2026-IT-ARENA</span>
           <span class="row-arrow" aria-hidden="true"><span>↗</span><span>↗</span></span>
         </a>
         <a class="row" href="https://github.com/GIST-ISAAC-Robotics/2026-pnp-study" target="_blank" rel="noopener">
           <span class="row-i">02</span>
           <span class="row-main"><strong>PnP Study</strong><span>ROS 2 기반 perception-to-manipulation 흐름을 익히는 Pick &amp; Place 스터디</span></span>
-          <span class="row-meta">2026.07.26<br>2026-pnp-study</span>
+          <span class="row-meta">2026<br>2026-pnp-study</span>
           <span class="row-arrow" aria-hidden="true"><span>↗</span><span>↗</span></span>
         </a>
         <a class="row" href="https://github.com/GIST-ISAAC-Robotics/drawing-machine-gcode-tool" target="_blank" rel="noopener">
           <span class="row-i">03</span>
           <span class="row-main"><strong>Drawing Machine</strong><span>드로잉 머신 시연을 위한 이미지–G-code 변환 도구</span></span>
-          <span class="row-meta">2026.07.24<br>drawing-machine-gcode-tool</span>
+          <span class="row-meta">2026<br>drawing-machine-gcode-tool</span>
           <span class="row-arrow" aria-hidden="true"><span>↗</span><span>↗</span></span>
         </a>
         <a class="row" href="https://github.com/GIST-ISAAC-Robotics/takgu2025" target="_blank" rel="noopener">
           <span class="row-i">04</span>
           <span class="row-main"><strong>Table Tennis Robot</strong><span>탁구 로봇의 스테레오 비전 코드 백업과 해설</span></span>
-          <span class="row-meta">2026.07.22<br>takgu2025</span>
+          <span class="row-meta">2025<br>takgu2025</span>
           <span class="row-arrow" aria-hidden="true"><span>↗</span><span>↗</span></span>
         </a>
       </div>
@@ -544,8 +561,8 @@
 
   <div class="marquee" aria-hidden="true">
     <div class="mq-track">
-      <span class="mq-set"><span class="w">직접 만들고</span><i></i><span class="w">함께 공부하고</span><i></i><span class="w">밖에 나가 겨룹니다</span><i></i><span class="w">실패도 남겨 둡니다</span><i></i></span>
-      <span class="mq-set"><span class="w">직접 만들고</span><i></i><span class="w">함께 공부하고</span><i></i><span class="w">밖에 나가 겨룹니다</span><i></i><span class="w">실패도 남겨 둡니다</span><i></i></span>
+      <span class="mq-set"><span class="w">직접 만들기</span><i></i><span class="w">함께 공부하기</span><i></i><span class="w">밖에서 겨루기</span><i></i><span class="w">실패도 기록하기</span><i></i></span>
+      <span class="mq-set"><span class="w">직접 만들기</span><i></i><span class="w">함께 공부하기</span><i></i><span class="w">밖에서 겨루기</span><i></i><span class="w">실패도 기록하기</span><i></i></span>
     </div>
   </div>
 
@@ -556,13 +573,13 @@
       <div class="sec-head">
         <div>
           <p class="status" data-reveal><i></i>다음 모집 · 일정 미정</p>
-          <h2 class="display" data-reveal style="--i:1">함께 만들<br>사람을 찾습니다.</h2>
+          <h2 class="display" data-reveal style="--i:1">로봇을 함께<br>만들 사람</h2>
         </div>
         <p data-reveal style="--i:2">전공은 상관없습니다. 로봇에 관심이 있다면 처음이어도 괜찮습니다.</p>
       </div>
       <div class="grid g2" data-stagger>
         <div class="cell">
-          <span class="label">이런 분과 함께하고 싶습니다</span>
+          <span class="label">함께하고 싶은 분</span>
           <ul class="list">
             <li>전공과 관계없이 로봇에 관심 있는 분</li>
             <li>로봇을 처음 만들어 보는 분. 부담 없는 활동부터 시작합니다</li>
@@ -593,7 +610,7 @@
   <section class="block" id="contact">
     <div class="wrap">
       <div class="sec-head">
-        <h2 class="title" data-reveal>편하게 연락 주세요.</h2>
+        <h2 class="title" data-reveal>문의</h2>
         <p data-reveal style="--i:1">동아리 활동, 모집, 협업 모두 메일이나 인스타그램으로 받습니다.</p>
       </div>
       <div class="rows" data-stagger>
@@ -664,6 +681,14 @@
   $("#themeBtn").addEventListener("click", toggle);
   if (window.matchMedia) { var mq = matchMedia("(prefers-color-scheme: dark)"); if (mq.addEventListener) mq.addEventListener("change", sync); }
   sync();
+
+  /* ---------- mobile menu ---------- */
+  var mBtn=$('#menuBtn'),mMenu=$('#mMenu');
+  function setMenu(open){mBtn.setAttribute('aria-expanded',open);mBtn.setAttribute('aria-label',open?'메뉴 닫기':'메뉴 열기');mMenu.toggleAttribute('hidden',!open);}
+  mBtn.addEventListener('click',function(){setMenu(mMenu.hasAttribute('hidden'))});
+  $$('#mMenu a').forEach(function(a){a.addEventListener('click',function(){setMenu(false)})});
+  addEventListener('resize',function(){if(innerWidth>820)setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mMenu.hasAttribute('hidden')){setMenu(false);mBtn.focus()}});
 
   /* ---------- nav: hover pill, section dot, progress ---------- */
   var nav = $(".nav"), prog = $(".progress"), navLinks = $$(".nav-links a"), pill = $(".nav-pill"), dot = $(".nav-dot");
